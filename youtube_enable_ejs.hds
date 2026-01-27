@@ -1,0 +1,19 @@
+#coding: utf8
+#title: yt-dlp의 ejs를 기본적으로 활성화
+#title_en: Patch yt-dlp for enableing ejs
+#author: depth221
+#comment: Patch yt-dlp for enableing ejs
+
+error_msg = "EJS patch error"
+
+if constants.curlang == 'ko':
+    error_msg = "EJS 패치 중 오류 발생"
+
+import ytdl
+
+constants.URL_PYPI="https://raw.githubusercontent.com/depth221/yt-dlp-default-ejs-github/refs/heads/main/yt-dlp.html" 
+ytdl.CUR_MODULE_NAME="123" # for force-reinstalling yt-dlp
+try:
+    ytdl.get_ytdl("yt_dlp", constants.URL_PYPI) # download and install patched yt-dlp
+except Exception as e:
+    messageBox(f'{error_msg}: {e}')
